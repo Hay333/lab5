@@ -1,19 +1,35 @@
 #include <iostream>
-#include <iomanip>
+#include <fstream>
+
 using namespace std;
 
 int main(int argc, char **argv)
 {
-	int chislo[10], i;
-    for (i = 0; i < 10; i++)
-    {
-        cin >> chislo[i];
-    }
-    for (i = 0; i < 10; i++)
-    {
-        cout << setw(7) << oct << chislo[i] << setw(7);
-        cout << setw(7) << dec << chislo[i] << setw(7);
-        cout << setw(7) << hex << chislo[i] << endl;
-    }
-	return 0;
+string text;
+{
+char * file2 = "/home/vladimir/Загрузки/f1.txt";
+ifstream ifs;
+ifs.open(file2);
+
+ifs.seekg (0, std::ios::end);
+int size = ifs.tellg();
+ifs.seekg(0,ios::beg);
+char * buffer = new char[size];
+
+ifs.read((char*)buffer, size);
+text = buffer;
+
+ifs.close();
+delete[] buffer;
 }
+
+{
+char * file3 = "/home/vladimir/Загрузки/f2.txt";
+ofstream ofs;
+
+ofs.open(file3, std::ios::app);
+ofs << text;
+ofs.close();
+}
+return 0;
+} 
